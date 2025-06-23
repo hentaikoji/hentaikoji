@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vidéo - Hentaikoji</title>
+  <style>
+    body {
+      background: url('fond-page-video.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: rgba(26, 26, 26, 0.8);
+      padding: 1rem 2rem;
+      border-bottom: 3px solid #ff0080;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.5rem;
+      color: #ff0080;
+      font-weight: bold;
+    }
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+    }
+    h1 {
+      color: #ff0080;
+    }
+    video {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 1rem;
+    }
+    .description {
+      margin-top: 1.5rem;
+      color: #ccc;
+    }
+    a {
+      color: #ff0080;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">HENTAIKOJI</div>
+    <a href="../index.html">Retour à l'accueil</a>
+  </header>
+  <div class="container">
+    <h1>Titre de l'épisode</h1>
+    <video controls width="100%" src="">
+    Votre navigateur ne prend pas en charge la lecture vidéo.
+</video>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const videoSrc = params.get("video");
+    document.querySelector("video").src = videoSrc;
+</script>
+
+  </div>
+</body>
+</html>

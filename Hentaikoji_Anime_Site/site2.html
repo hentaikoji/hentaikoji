@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hentaikoji - Streaming Anime</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    html, body {
+      height: 100%;
+    }
+    body {
+      background: url("fond-site-hk.jpg") no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(26, 26, 26, 0.9);
+      padding: 1rem 2rem;
+      border-bottom: 3px solid #ff0080;
+    }
+    .logo {
+      font-size: 1.5rem;
+      color: #ff0080;
+      font-weight: bold;
+    }
+    #search, #genre-filter {
+      padding: 0.5rem;
+      border: none;
+      border-radius: 5px;
+      margin-left: 1rem;
+    }
+    nav {
+      background: rgba(34, 34, 34, 0.9);
+      padding: 1rem;
+    }
+    nav ul {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      justify-content: center;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+    }
+    main {
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background-color: rgba(30, 30, 30, 0.85);
+      padding: 0.5rem;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .card img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .card-title {
+      margin-top: 0.5rem;
+      font-weight: bold;
+      text-align: center;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background-color: rgba(26, 26, 26, 0.9);
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">HENTAIKOJI</div>
+    <div>
+      <input type="text" id="search" placeholder="Rechercher une video..." />
+      <select id="genre-filter">
+        <option value="">Tous les genres</option>
+        <option value="Anal">Anal</option>
+        <option value="Bdsm">Bdsm</option>
+        <option value="Femboy">Femboy</option>
+        <option value="Gay">Gay</option>
+        <option value="Lesbiennes">Lesbiennes</option>
+        <option value="Tomboy">Tomboy</option>
+      </select>
+    </div>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="video.html">Épisode</a></li>
+      <li>Genres</li>
+      <li>Favoris</li>
+    </ul>
+  </nav>
+
+  <main id="gallery"></main>
+
+  <footer>
+    &copy; 2025 Hentaikoji. Tous droits réservés.
+  </footer>
+
+  <script>
+    window.onload = () => {
+      if (sessionStorage.getItem('ageVerified') !== 'true') {
+        window.location.href = "age-verification.html";
+      }
+    };
+
+    const gallery = document.getElementById("gallery");
+    const genreFilter = document.getElementById("genre-filter");
+
+    const animes = [
+      { title: "Overflow", genre: "Romance", image: "https://via.placeholder.com/300x170?text=Overflow", link: "hentaikoji_lecteur/pages/video.html?video=../videos/episode2.mp4" },
+      { title: "Ane Kyun!", genre: "Comédie", image: "https://via.placeholder.com/300x170?text=Ane+Kyun!", link: "hentaikoji_lecteur/pages/video.html?video=../videos/episode3.mp4" },
+      { title: "Taimanin Asagi", genre: "Action", image: "https://via.placeholder.com/300x170?text=Taimanin+Asagi", link: "hentaikoji_lecteur/pages/video.html?video=../videos/episode4.mp4" },
+      { title: "Resort Boin", genre: "Fantastique", image: "https://via.placeholder.com/300x170?text=Resort+Boin", link: "hentaikoji_lecteur/pages/video.html?video=../videos/episode5.mp4" }
+    ];
+
+    function renderGallery(filterGenre = "") {
+      gallery.innerHTML = "";
+      animes
+        .filter(anime => !filterGenre || anime.genre === filterGenre)
+        .forEach(anime => {
+          const card = document.createElement("div");
+          card.className = "card";
+          card.innerHTML = `
+            <a href="${anime.link}">
+              <img src="${anime.image}" alt="${anime.title}">
+              <div class="card-title">${anime.title}</div>
+            </a>
+          `;
+          gallery.appendChild(card);
+        });
+    }
+
+    genreFilter.addEventListener("change", () => {
+      renderGallery(genreFilter.value);
+    });
+
+    renderGallery();
+  </script>
+</body>
+</html>
