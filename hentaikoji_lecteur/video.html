@@ -61,16 +61,36 @@
   </header>
   <div class="container">
     <h1>Titre de l'épisode</h1>
-    <video controls width="100%" src="">
-    Votre navigateur ne prend pas en charge la lecture vidéo.
+   <!-- Fluid Player CSS -->
+<link rel="stylesheet" href="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.css">
+
+<!-- Ton lecteur vidéo avec ID -->
+<video id="my-video" controls>
+  <source src="" type="video/mp4">
 </video>
 
-<script>
-    const params = new URLSearchParams(window.location.search);
-    const videoSrc = params.get("video");
-    document.querySelector("video").src = videoSrc;
-</script>
+<!-- Script Fluid Player -->
+<script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
 
+<script>
+  // Charger la vidéo dynamiquement
+  const params = new URLSearchParams(window.location.search);
+  const videoSrc = params.get("video");
+  document.querySelector("#my-video source").src = videoSrc;
+  document.querySelector("#my-video").load();
+
+  // Initialise Fluid Player avec pub VAST
+  fluidPlayer("my-video", {
+    vastOptions: {
+      adList: [{
+        roll: "preRoll",
+        vastTag: "https://s.magsrv.com/v1/vast.php?idzone=5656922"
+      }],
+      skipButtonCaption: "Passer la pub",
+      skipOffset: 5
+    }
+  });
+</script>
   </div>
 </body>
 </html>
